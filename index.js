@@ -5,13 +5,18 @@ const logger = require("./logger");
 const express = require("express");
 app = express();
 
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`); // return undefined if not set
+// console.log(`app: ${app.get("env")}`);            // return development by default
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use(helmet());
-app.use(morgan("tiny"));
-
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled...");
+}
 app.use(logger);
 
 const courses = [
