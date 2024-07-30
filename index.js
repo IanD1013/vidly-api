@@ -1,3 +1,4 @@
+const config = require("config");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const Joi = require("joi");
@@ -8,15 +9,24 @@ app = express();
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`); // return undefined if not set
 // console.log(`app: ${app.get("env")}`);            // return development by default
 
+// Configuration
+console.log("Application Name: " + config.get("name"));
+console.log("Mail Server: " + config.get("mail.host"));
+console.log("Mail Password: " + config.get("mail.password"));
+
+// Built-in middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// Third-party middlewares
 app.use(helmet());
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
   console.log("Morgan enabled...");
 }
+
+// Custom middlewares
 app.use(logger);
 
 const courses = [
