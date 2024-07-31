@@ -1,4 +1,3 @@
-const { date } = require("joi");
 const mongoose = require("mongoose");
 
 // 1. Connect to MongoDB
@@ -14,4 +13,13 @@ const courseSchema = new mongoose.Schema({
   tags: [String],
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
+});
+
+// 3. Compile schema into a model and gives a class
+const Course = mongoose.model("Course", courseSchema);
+const course = new Course({
+  name: "Node.js Course",
+  author: "Mosh",
+  tags: ["node", "backend"],
+  isPublished: true,
 });
