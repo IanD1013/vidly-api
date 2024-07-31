@@ -14,6 +14,14 @@ function displayCommits(commits) {
   console.log(commits);
 }
 
+/************************************************* */
+getUser(1)
+  .then((user) => getRepositories(user.gitHubUsername))
+  .then((repos) => getCommits(repos[0]))
+  .then((commits) => console.log("Commits", commits))
+  .catch((err) => console.log("Error", err.message));
+
+/************************************************* */
 function getUser(id) {
   return new Promise((resolve, reject) => {
     // Kick off some async work
