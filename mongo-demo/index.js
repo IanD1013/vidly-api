@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { min } = require("underscore");
 
 mongoose
   .connect("mongodb://localhost/playground")
@@ -6,21 +7,43 @@ mongoose
   .catch((err) => console.error("Could not connect to MongoDB...", err));
 
 const courseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 255,
+    // match: /pattern/,
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ["web", "mobile", "network"],
+  },
   author: String,
   tags: [String],
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
+  price: {
+    type: Number,
+    required: function () {
+      // arrow function will not work here as it does not have its own 'this', they use the "this" value of the enclosing execution context
+      return this.isPublished;
+    },
+    min: 10,
+    max: 200,
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    //name: "Angular Course",
+    name: "Angular Course",
+    category: "-",
     author: "Mosh",
     tags: ["angular", "frontend"],
     isPublished: true,
+    price: 15,
   });
 
   try {
