@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { create } = require("underscore");
 
 mongoose
   .connect("mongodb://localhost/playground")
@@ -28,4 +27,13 @@ async function createCourse() {
   console.log(result);
 }
 
-createCourse();
+async function getCourses() {
+  const courses = await Course.find({ author: "Mosh", isPublished: true })
+    .limit(10)
+    .sort({ name: 1 }) // 1 for ascending, -1 for descending
+    .select({ name: 1, tags: 1 }); // 1 for including, 0 for excluding
+
+  console.log(courses);
+}
+
+getCourses();
