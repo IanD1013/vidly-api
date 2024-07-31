@@ -23,3 +23,6 @@ const course = new Course({
   tags: ["node", "backend"],
   isPublished: true,
 });
+
+// 4. Save the course to the database
+course.save().then((result) => console.log(result));
