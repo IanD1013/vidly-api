@@ -27,6 +27,7 @@ async function createCourse() {
   console.log(result);
 }
 
+/*********** Query Documents **************/
 async function getCourses() {
   const pageNumber = 2;
   const pageSize = 10;
@@ -52,4 +53,31 @@ async function getCourses() {
   console.log(courses);
 }
 
-getCourses();
+/*********** Update Documents **************/
+// Approach: Query first
+// findById()
+// Modify its properties
+// save()
+
+// Approach: Update first
+// Update directly
+// Optionally: get the updated document
+
+// QUERY FIRST:
+async function updateCourse(id) {
+  const course = await Course.findById(id);
+  if (!course) return;
+
+  course.isPublished = true;
+  course.author = "Another Author";
+
+  // course.set({
+  //   isPublished: true,
+  //   author: "Another Author",
+  // });
+
+  const result = await course.save();
+  console.log(result);
+}
+
+updateCourse();
