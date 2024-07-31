@@ -41,6 +41,7 @@ async function getCourses() {
     // .find({ author: /.*Mosh.*/i }) // Contains Mosh
     .limit(10)
     .sort({ name: 1 }) // 1 for ascending, -1 for descending
+    // .count()
     .select({ name: 1, tags: 1 }); // 1 for including, 0 for excluding
 
   console.log(courses);
