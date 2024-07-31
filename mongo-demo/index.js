@@ -80,4 +80,30 @@ async function updateCourse(id) {
   console.log(result);
 }
 
+// UPDATE FIRST - 1:
+async function updateCourse(id) {
+  const result = await Course.update(
+    { _id: id },
+    {
+      $set: { author: "Mosh", isPublished: false },
+    }
+  );
+
+  console.log(result); // { n: 1, nModified: 1, ok: 1 }
+}
+
+// UPDATE FIRST - 2:
+// sometimes we need the updated document
+async function updateCourse(id) {
+  const course = await Course.findByIdAndUpdate(
+    id,
+    {
+      $set: { author: "Jack", isPublished: true },
+    },
+    { new: true }
+  );
+
+  console.log(course);
+}
+
 updateCourse();
