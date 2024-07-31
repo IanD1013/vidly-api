@@ -42,10 +42,6 @@ app.use("/api/courses", courses);
 app.use("/api/genres", genres);
 app.use("/", home);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 const port = process.env.PORT || 3000; // set PORT=5000 to change port
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
