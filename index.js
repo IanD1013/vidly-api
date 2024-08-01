@@ -8,6 +8,7 @@ const logger = require("./middleware/logger");
 
 const courses = require("./routes/courses");
 const genres = require("./routes/genres");
+const customers = require("./routes/customers");
 const home = require("./routes/home");
 
 const express = require("express");
@@ -45,6 +46,7 @@ dbDebugger("Connected to the database...");
 app.use(logger);
 app.use("/api/courses", courses);
 app.use("/api/genres", genres);
+app.use("/api/customers", customers);
 app.use("/", home);
 
 const port = process.env.PORT || 3000; // set PORT=5000 to change port
