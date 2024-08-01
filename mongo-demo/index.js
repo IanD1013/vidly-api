@@ -157,7 +157,7 @@ async function removeCourse(id) {
   const result1 = await Course.deleteOne({ _id: id });
   const result2 = await Course.deleteMany({ isPublished: false }); // result shows # documents deleted
 
-  const course = await Course.findByIdAndRemove(id); // returns the document that was removed, will return null if not found
+  const course = await Course.findByIdAndDelete(id); // returns the document that was removed, will return null if not found
   console.log(course);
 }
 

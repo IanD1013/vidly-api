@@ -1,9 +1,9 @@
+const mongoose = require("mongoose");
 const startupDebugger = require("debug")("app:startup");
 const dbDebugger = require("debug")("app:db");
 const config = require("config");
 const morgan = require("morgan");
 const helmet = require("helmet");
-const Joi = require("joi");
 const logger = require("./middleware/logger");
 
 const courses = require("./routes/courses");
@@ -12,6 +12,11 @@ const home = require("./routes/home");
 
 const express = require("express");
 app = express();
+
+mongoose
+  .connect("mongodb://localhost/vidly")
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.error("Could not connect to MongoDB...", err));
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`); // return undefined if not set
 // console.log(`app: ${app.get("env")}`);            // return development by default
