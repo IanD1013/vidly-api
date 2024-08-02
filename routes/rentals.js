@@ -38,9 +38,9 @@ router.post("/", async (req, res) => {
   // need transactions here
   rental = await rental.save();
   movie.numberInStock--;
-  movie.save();
+  await movie.save();
 
-  res.send(rental);
+  res.status(201).send(rental);
 });
 
 router.get("/:id", async (req, res) => {
