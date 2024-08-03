@@ -1,4 +1,5 @@
 {
   "name": "vidly",
-  "jwtPrivateKey": ""
+  "jwtPrivateKey": "",
+  "db": "mongodb://localhost/vidly"
 }
