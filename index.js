@@ -7,6 +7,7 @@ const config = require("config");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const logger = require("./middleware/logger");
+const error = require("./middleware/error");
 
 const courses = require("./routes/courses");
 const genres = require("./routes/genres");
@@ -62,6 +63,7 @@ app.use("/api/rentals", rentals);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/", home);
+app.use(error);
 
 const port = process.env.PORT || 3000; // set PORT=5000 to change port
 app.listen(port, () => {
