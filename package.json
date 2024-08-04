@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles"
+    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "21.7.1"
   },
   "keywords": [],
   "author": "",
